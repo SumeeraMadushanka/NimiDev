@@ -20,6 +20,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 8070;
+
 app.listen(PORT, () => {
   console.log(`Server is up and running port ${PORT}`);
 });
+
+app.use("/api/auth", require("./backend/routes/auth/auth"));
