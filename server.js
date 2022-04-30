@@ -27,3 +27,4 @@ app.listen(PORT, () => {
 });
 
 app.use("/api/auth", require("./backend/routes/auth/auth"));
+app.use("/product", require("./backend/routes/Product"));
