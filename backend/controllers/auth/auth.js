@@ -187,15 +187,54 @@ const sendToken = (user, statusCode, res) => {
   const contactNo = user.contactNo;
   const email = user.email;
   const type = user.type;
-  res
-    .status(200)
-    .json({
-      success: true,
-      token,
-      firstName,
-      lastName,
-      contactNo,
-      email,
-      type,
-    });
+  res.status(200).json({
+    success: true,
+    token,
+    firstName,
+    lastName,
+    contactNo,
+    email,
+    type,
+  });
+};
+
+exports.getUser = async (req, res) => {
+  await User.find()
+    .then((user) => res.json(user))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
+
+//controller for getting a relavant document using id
+exports.getUserID = async (req, res) => {
+  const { id } = req.params;
+
+  await User.findById(id)
+    .then((users) => res.json(users))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
+
+//controller for deleting a relavant document using id
+exports.deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  await User.findByIdAndDelete(id) //find the document by id and remove
+    .then(() => res.json({ message: "Successfully Deleted" }))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
+
+//controller for updating a relavant document using id
+exports.updateUser = async (req, res) => {
+  //backend controller for updating relevant data and passing back
+  const { id } = req.params;
+
+  const { firstName, lastName, contactNo } = req.body;
+
+  //find the document by id and update the relevant data
+  await User.findByIdAndUpdate(id, {
+    firstName,
+    lastName,
+    contactNo,
+  })
+    .then(() => res.json({ success: true }))
+    .catch((error) => res.json({ success: false, error: error }));
 };
