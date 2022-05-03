@@ -5,10 +5,13 @@ exports.createProduct = async (req, res) => {
 
   const productQty = Number(req.body.productQty);
 
+  const productPrice = Number(req.body.productPrice);
+
   const newProduct = new Product({
     productNumber,
     productName,
     productCategory,
+    productPrice,
     productQty,
   });
 
@@ -43,12 +46,19 @@ exports.deleteProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   const { id } = req.params;
 
-  const { productNumber, productName, productCategory, productQty } = req.body;
+  const {
+    productNumber,
+    productName,
+    productCategory,
+    productQty,
+    productPrice,
+  } = req.body;
 
   await Product.findByIdAndUpdate(id, {
     productNumber,
     productName,
     productCategory,
+    productPrice,
     productQty,
   })
     .then(() => res.json({ message: "Update Successfully" }))
