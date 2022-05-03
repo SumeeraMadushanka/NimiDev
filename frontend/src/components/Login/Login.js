@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Input, Button, Layout, Checkbox, Spin } from "antd";
+import { Row, Col, Form, Input, Button, Checkbox, Spin } from "antd";
 import "./Login.css";
 
 import { LoginOutlined } from "@ant-design/icons";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import ForgetPassword from "./ForgetPassword";
-
-const { Header } = Layout;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -44,12 +42,13 @@ const Login = () => {
       localStorage.setItem("contactNo", data?.contactNo);
       localStorage.setItem("email", data?.email);
       localStorage.setItem("type", data?.type);
+      localStorage.setItem("id", data?.id);
 
       setTimeout(() => {
         // set a 5seconds timeout for authentication
 
         if (data.type === "Admin") {
-          history(`/admin-dashboard/${data.username}`);
+          history(`/admin-dashboard/${data.firstName}`);
         } else {
           history(`/user-dashboard/${data.firstName}`);
         }
@@ -127,7 +126,6 @@ const Login = () => {
                 />
                 <Checkbox onClick={showPassword}>Show Password</Checkbox>
                 <br /> <br /> <br />
-                {/* <a className="forget-text">Forgot password?</a> */}
                 <ForgetPassword />
                 <div className="btn-wrap">
                   <center>
@@ -179,6 +177,8 @@ const Login = () => {
           </Col> */}
         </Row>
       </div>
+      <br />
+      <br />
     </>
   );
 };
