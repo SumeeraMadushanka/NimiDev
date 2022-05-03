@@ -187,6 +187,7 @@ const sendToken = (user, statusCode, res) => {
   const contactNo = user.contactNo;
   const email = user.email;
   const type = user.type;
+  const id = user._id;
   res.status(200).json({
     success: true,
     token,
@@ -195,6 +196,7 @@ const sendToken = (user, statusCode, res) => {
     contactNo,
     email,
     type,
+    id,
   });
 };
 
