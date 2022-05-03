@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
+import { Popover, Button } from "antd";
 import "antd/dist/antd.css";
+
+import UserProfile from "../User/UserProfile";
 
 const NavBar = () => {
   let Links = [
@@ -10,20 +13,33 @@ const NavBar = () => {
     { name: "CONTACT", link: "/contact" },
   ];
 
+  const { firstName } = useParams();
+
   const [open, setOpen] = useState(false);
 
   const location = useLocation();
   const { pathname } = location;
 
-  console.log(location);
+  const content = (
+    <div style={{ width: "2px" }}>
+      <div>
+        <UserProfile />
+      </div>
+      <div className="mt-1">
+        <NavLink to="/login">
+          <Button className="w-20">Logout</Button>
+        </NavLink>
+      </div>
+    </div>
+  );
 
   return (
     <>
-      <div className="shadow-md w-full fixed top-0 left-0 z-10">
+      <div className="shadow-md w-full  top-0 left-0 z-10">
         <div className="md:flex items-center justify-between bg-zinc-800 py-1 md:px-10 px-7">
-          <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-sky-600">
-            <div className=" text-6xl translate-y-0.5">
-              <ion-icon name="logo-wordpress"></ion-icon>
+          <div className="font-bold -translate-x-7 text-2xl cursor-pointer flex items-center font-[Poppins] text-sky-600">
+            <div className=" text-5xl translate-y-0.5">
+              <ion-icon name="logo-windows"></ion-icon>
             </div>
             <NavLink to="/">
               <span class="ml-3 text-xl pl-1 text-sky-600">
@@ -67,12 +83,16 @@ const NavBar = () => {
                   </button>
                 </NavLink>
               ) : (
-                <NavLink to="/login">
-                  <button className="inline-flex items-center bg-sky-600 text-white border-0 py-1 px-3 focus:outline-none hover:bg-black rounded-full text-base mt-4 md:mt-0 translate-x-6">
-                    Logout
-                    <ion-icon name="log-out"></ion-icon>
-                  </button>
-                </NavLink>
+                <button className="inline-flex items-center bg-sky-600 text-white border-0 py-1 px-3 focus:outline-none hover:bg-black rounded-full text-base mt-4 md:mt-0 translate-x-6">
+                  <Popover
+                    placement="bottom"
+                    content={content}
+                    title={`Hello ${firstName}`}
+                    trigger="hover"
+                  >
+                    My Account
+                  </Popover>
+                </button>
               )}
             </div>
           </ul>
