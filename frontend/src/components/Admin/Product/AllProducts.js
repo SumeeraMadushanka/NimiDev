@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Table } from "antd";
 
 function onChange(pagination, filters, sorter, extra) {
@@ -20,12 +21,27 @@ const AllProducts = () => {
     })();
   }, []);
 
+  const history = useNavigate();
+
   const columns = [
     {
       title: "Prodcut Number",
       dataIndex: "productNumber",
       sorter: (a, b) => a.productNumber.length - b.productNumber.length,
       sortDirections: ["descend"],
+      render: (text) => (
+        <a
+          onClick={() =>
+            history(
+              `/admin-dashboard/${localStorage.getItem(
+                "firstName"
+              )}?_edit=true&_id=${text}`
+            )
+          }
+        >
+          {text}
+        </a>
+      ),
     },
     {
       title: "Product Name",

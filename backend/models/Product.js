@@ -21,6 +21,9 @@ const Product = new Schema({
   productQty: {
     type: Number,
   },
+  productImage: {
+    type: String,
+  },
 });
 
 const newProduct = mongoose.model("product", Product);

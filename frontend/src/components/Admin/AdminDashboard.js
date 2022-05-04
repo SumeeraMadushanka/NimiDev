@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Layout, Menu, Button, Breadcrumb } from "antd";
 import {
   FundProjectionScreenOutlined,
@@ -13,6 +13,7 @@ import ProductDashboard from "./Product/ProductDashboard";
 import Header from "./Header";
 import AllProduct from "./Product/AllProducts";
 import AddProduct from "./Product/AddProduct";
+import UpdateProduct from "./Product/UpdateProduct";
 
 //Customer components
 import CustomerDashboard from "./Customer/CustomerDashboard";
@@ -25,13 +26,28 @@ const AdminDashboard = () => {
   const location = useLocation();
   const search = window.location.search;
 
-  const param = new URLSearchParams(search);
+  const params = new URLSearchParams(search);
 
-  const queryCustomer = param.get("_optCustomer");
-  const queryProduct = param.get("_optProduct");
+  const queryCustomer = params.get("_optCustomer");
+  const queryProduct = params.get("_optProduct");
+  const queryEdit = params.get("_edit");
 
   const onCollapse = (collapsed) => {
     setCollapsed(collapsed);
+  };
+
+  const { firstName, lastName, contactNo, email, id, type, authToken } =
+    useParams();
+
+  const logoutHandler = () => {
+    localStorage.removeItem("firstName", firstName);
+    localStorage.removeItem("lastName", lastName);
+    localStorage.removeItem("contactNo", contactNo);
+    localStorage.removeItem("email", email);
+    localStorage.removeItem("id", id);
+    localStorage.removeItem("type", type);
+    localStorage.removeItem("authToken", authToken);
+    history("/login");
   };
 
   const date = new Date();
@@ -64,16 +80,12 @@ const AdminDashboard = () => {
               : null
           }
         >
-           <Menu.Item
+          <Menu.Item
             key="1"
             icon={<HomeOutlined />}
             className="text-lg"
             onClick={() => {
-              history(
-                `/admin-dashboard/${localStorage.getItem(
-                  "firstName"
-                )}`
-              );
+              history(`/admin-dashboard/${localStorage.getItem("firstName")}`);
             }}
           >
             Dashboard
@@ -109,11 +121,12 @@ const AdminDashboard = () => {
         </Menu>
         {collapsed === false ? (
           <center className="my-12">
-            <NavLink to="/login">
-              <Button icon={<LogoutOutlined className="-translate-y-0.5" />}>
-                Sign Out
-              </Button>
-            </NavLink>
+            <Button
+              icon={<LogoutOutlined className="-translate-y-0.5" />}
+              onClick={() => logoutHandler()}
+            >
+              Sign Out
+            </Button>
           </center>
         ) : (
           <center className="my-12 hover:rounded-full hover:bg-slate-500 p-4  hover:mx-4">
@@ -132,6 +145,7 @@ const AdminDashboard = () => {
           </Breadcrumb>
           {queryCustomer === "customer" && <CustomerDashboard />}
           {queryProduct === "addProduct" && [<Header />, <AddProduct />]}
+          {queryEdit === "true" && [<Header />, <UpdateProduct />] }
           {queryProduct === "allProducts" && [<Header />, <AllProduct />]}
           {queryProduct === "product" && [<Header />, <ProductDashboard />]}
         </Content>

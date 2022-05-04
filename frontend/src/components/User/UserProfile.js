@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Input, Spin, notification, Select } from "antd";
+import { Modal, Button, Form, Input, Spin, notification } from "antd";
 import { FileDoneOutlined, DollarCircleOutlined } from "@ant-design/icons";
 
 import axios from "axios";
-
-import { useParams } from "react-router-dom";
 
 const layout = {
   labelCol: {
@@ -31,8 +29,10 @@ const UserProfile = () => {
   const [loader, setLoader] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { id } = useParams();
-
+  const search = window.location.search;
+  const params = new URLSearchParams(search);
+  const id = params.get("_id");
+  
   useEffect(() => {
     (async () => {
       await axios
