@@ -5,7 +5,7 @@ const crypto = require("crypto");
 //when we use asynchronous function we need try catch block
 exports.register = async (req, res) => {
   //controller for register
-  const { firstName, lastName, contactNo, email, password } = req.body; //destructur e method
+  const { firstName, lastName, contactNo, email, password, type } = req.body; //destructur e method
 
   try {
     const user = await User.create({
@@ -13,7 +13,8 @@ exports.register = async (req, res) => {
       lastName,
       contactNo,
       email,
-      password, //this.password filed of user.js in models
+      password,
+      type, //this.password filed of user.js in models
     });
     sendToken(user, 200, res);
   } catch (error) {
