@@ -8,13 +8,13 @@ import {
 } from "@ant-design/icons";
 
 //Product components
-// import ProductDashboard from "./Product/ProductDashboard";
-// import Header from "./Header";
-// import AllProduct from "./Product/AllProducts";
-// import AddProduct from "./Product/AddProduct";
-
-//Customer components
-// import CustomerDashboard from "./Customer/CustomerDashboard";
+import Laptop from "../Products/Laptop";
+import Monitor from "../Products/Monitor";
+import Storage from "../Products/Storage";
+import GraphicCard from "../Products/GraphicCard";
+import Processor from "../Products/Processor";
+import KeyboardMouse from "../Products/KeyboardMouse";
+import PCcase from "../Products/PCcase";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -39,14 +39,6 @@ const UserDashboard = () => {
   };
 
   const date = new Date();
-  const hrs = date.getHours();
-
-  let greet;
-
-  if (hrs < 12) greet = "Good Morning";
-  else if (hrs >= 12 && hrs < 17) greet = "Good Afternoon";
-  else if (hrs >= 17 && hrs < 19) greet = "Good Evening";
-  else greet = "Good Night";
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -181,16 +173,14 @@ const UserDashboard = () => {
       <Layout className="site-layout">
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>{greet}</Breadcrumb.Item>
-            <Breadcrumb.Item>{`${localStorage.getItem(
-              "firstName"
-            )}`}</Breadcrumb.Item>
           </Breadcrumb>
-          {/* {queryCustomer === "customer" && <Header />}
-
-          {queryProduct === "addProduct" && [<Header />, <AddProduct />]}
-          {queryProduct === "allProducts" && [<Header />, <AllProduct />]}
-          {queryProduct === "product" && [<Header />, <ProductDashboard />]} */}
+          {queryLaptop === "laptop" && <Laptop />}
+          {queryMonitor === "monitor" && <Monitor />}
+          {queryGraphicCard === "graphic_card" && <GraphicCard />}
+          {queryProcessor === "processor" && <Processor />}
+          {queryStorageDrive === "storage_drive" && <Storage />}
+          {queryPCcase === "pc_case" && <PCcase />}
+          {queryKeyboardMouse === "keyboard_mouse" && <KeyboardMouse />}
         </Content>
         <Footer style={{ textAlign: "center" }}>
           Copyright © {date.getFullYear()} WinMac Computers
