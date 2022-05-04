@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, Spin, Tooltip, notification, Col } from "antd";
 
 import { FileDoneOutlined, InfoCircleOutlined } from "@ant-design/icons";
@@ -83,7 +83,7 @@ const Register = () => {
   const [form] = Form.useForm();
   return (
     <>
-      <div className="container mx-auto contact-bg">
+      <div className="container mx-auto">
         <div className="flex justify-center mt-8 gap-28 mb-10 w-full">
           <div className=" border-2 text-center border-gray-900 px-72 register-bg bg-cover mt-10 mb-10">
             <div className="mb-10">
@@ -157,7 +157,7 @@ const Register = () => {
                         rules={[
                           {
                             required: true,
-                            message: "Please input your Phone Number!",
+                            message: "input your Phone Number!",
                           },
                           {
                             min: 10,
@@ -248,23 +248,26 @@ const Register = () => {
                     </div>
                     <Form.Item {...tailLayout}>
                       <div className="flex  px-20 mt-8">
-                        <Button type="primary" htmlType="submit">
-                          {loading ? (
-                            <>
-                              <Spin /> Registering..
-                            </>
-                          ) : (
-                            "Register"
-                          )}
-                        </Button>{" "}
-                        {error && (
-                          <span
-                            className="error-message"
-                            style={{ color: "red" }}
+                        {loading ? (
+                          <Button
+                            label={"SUBMIT"}
+                            htmlType="submit"
+                            type={"primary"}
+                            disabled={loading}
+                            icon={<Spin />}
                           >
-                            {error}
-                          </span>
-                        )}{" "}
+                            &nbsp;Submiting...
+                          </Button>
+                        ) : (
+                          <Button
+                            label={"SUBMIT"}
+                            htmlType="submit"
+                            type={"primary"}
+                            disabled={loading}
+                          >
+                            SUBMIT
+                          </Button>
+                        )}
                       </div>
                     </Form.Item>
                   </Form>

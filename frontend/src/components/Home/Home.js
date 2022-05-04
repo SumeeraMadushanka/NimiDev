@@ -1,8 +1,11 @@
 import React from "react";
 import "./Home.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Home = () => {
+  const { id, type, email, contactNo, lastName, firstName, token } =
+    useParams();
+    
   return (
     <div className=" container max-w-full">
       <div className="bg-bg-homepage bg-cover h-screen hover:duration-600">
