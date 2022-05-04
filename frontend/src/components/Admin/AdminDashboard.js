@@ -131,7 +131,6 @@ const AdminDashboard = () => {
             <Breadcrumb.Item>Admin</Breadcrumb.Item>
           </Breadcrumb>
           {queryCustomer === "customer" && <CustomerDashboard />}
-
           {queryProduct === "addProduct" && [<Header />, <AddProduct />]}
           {queryProduct === "allProducts" && [<Header />, <AllProduct />]}
           {queryProduct === "product" && [<Header />, <ProductDashboard />]}
