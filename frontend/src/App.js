@@ -6,6 +6,9 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import UserDashboard from "./components/User/UserDashboard";
+import Services from "./components/Services/Services";
+import About from "./components/About/About";
+import Contact from "./components/Contact/Contact";
 
 const App = () => {
   return (
@@ -13,6 +16,9 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={[<NavBar />, <Home />]} />
+          <Route path="/about" element={[<NavBar />, <About />]} />
+          <Route path="/services" element={[<NavBar />, <Services />]} />
+          <Route path="/contact" element={[<NavBar />, <Contact />]} />
           <Route path="/login" element={[<NavBar />, <Login />]} />
           <Route path="/register" element={[<NavBar />, <Register />]} />
           <Route
@@ -22,7 +28,7 @@ const App = () => {
 
           <Route
             path="/admin-dashboard/:firstName"
-            element={[ <AdminDashboard />]}
+            element={[<AdminDashboard />]}
           />
         </Routes>
       </Router>
