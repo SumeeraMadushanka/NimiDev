@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { Popover, Button } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
 import UserProfile from "../User/UserProfile";
@@ -83,16 +84,24 @@ const NavBar = () => {
                   </button>
                 </NavLink>
               ) : (
-                <button className="inline-flex items-center bg-sky-600 text-white border-0 py-1 px-3 focus:outline-none hover:bg-black rounded-full text-base mt-4 md:mt-0 translate-x-6">
-                  <Popover
-                    placement="bottom"
-                    content={content}
-                    title={`Hello ${firstName}`}
-                    trigger="hover"
-                  >
-                    My Account
-                  </Popover>
-                </button>
+                <div className=" flex ite">
+                  <div className="bg-white w-28 hover:opacity-75 rounded-3xl flex justify-between items-center p-1 cursor-pointer">
+                    <ShoppingCartOutlined className=" text-3xl translate-x-1" />
+                    <div className=" rounded-full text-lg  border-4 -translate-x-2 border-red-400 px-1 text-slate-900 ">
+                      01
+                    </div>
+                  </div>
+                  <button className="inline-flex items-center bg-sky-600 text-white border-0 py-1 px-3 focus:outline-none hover:bg-black rounded-full text-base mt-4 md:mt-0 translate-x-6">
+                    <Popover
+                      placement="bottom"
+                      content={content}
+                      title={`Hello ${firstName}`}
+                      trigger="hover"
+                    >
+                      My Account
+                    </Popover>
+                  </button>
+                </div>
               )}
             </div>
           </ul>

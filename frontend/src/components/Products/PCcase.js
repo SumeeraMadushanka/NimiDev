@@ -47,9 +47,14 @@ const PCcase = () => {
                         {value.productName}
                       </h1>
                     </div>
-                    <h2 class="tracking-widest text-base title-font font-medium text-red-600 mb-1">
-                      Quantity: {value.productQty}
-                    </h2>
+                    <div className=" flex justify-between">
+                      <h2 class="tracking-widest text-base title-font font-medium text-red-600 mb-1">
+                        Quantity: {value.productQty}
+                      </h2>
+                      <h2 class="tracking-widest text-base title-font font-medium text-red-600 mb-1">
+                        LKR, {Number(value.productPrice) * 370}.00
+                      </h2>
+                    </div>
                     <div>
                       <button className=" mx-auto mb-4 btn">
                         <span class="text spaan">Add to Cart</span>
