@@ -32,6 +32,8 @@ const Register = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false); //additional
 
+  const type = "user";
+
   const registerHandler = async (placement) => {
     // create handler for saving data to the db
     setLoading(true);
@@ -53,6 +55,7 @@ const Register = () => {
           email,
           password,
           contactNo,
+          type,
         },
         config
       );
