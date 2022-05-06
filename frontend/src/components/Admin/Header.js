@@ -71,7 +71,7 @@ const Header = () => {
                   history(
                     `/admin-dashboard/${localStorage.getItem(
                       "firstName"
-                    )}?_optProduct=addProduct`
+                    )}?_product=addProduct`
                   )
                 }
               >
@@ -84,7 +84,7 @@ const Header = () => {
                   history(
                     `/admin-dashboard/${localStorage.getItem(
                       "firstName"
-                    )}?_optProduct=allProducts`
+                    )}?_product=allProducts`
                   )
                 }
               >
