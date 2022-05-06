@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const Cart = require("../models/cart");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 let path = require("path");
@@ -92,3 +93,49 @@ exports.updateProduct = async (req, res) => {
     .then(() => res.json({ message: "Update Successfully" }))
     .catch((error) => res.json({ success: false, error: error }));
 };
+
+exports.createCart = async (req, res) => {
+  const { productNumber, productName, productCategory, productImage } =
+    req.body;
+
+  const productQty = Number(req.body.productQty);
+
+  const productPrice = Number(req.body.productPrice);
+
+  const newCart = new Cart({
+    productNumber,
+    productName,
+    productCategory,
+    productPrice,
+    productQty,
+    productImage,
+  });
+
+  await newCart
+    .save()
+    .then(() => res.json({ success: true }))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
+
+exports.getCart = async (req, res) => {
+  await Cart.find()
+    .then((cart) => res.json(cart))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
+
+exports.deleteCart = async (req, res) => {
+  const { id } = req.params;
+
+  await Cart.findByIdAndDelete(id)
+    .then(() => res.json({ message: "Successfully Deleted" }))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
+
+exports.deleteCartItems = async (req, res) => {
+
+  await Cart.deleteMany({})
+    .then(() => res.json({ message: "Successfully Deleted" }))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
+
+

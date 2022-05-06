@@ -11,6 +11,7 @@ import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import UserProfile from "./components/User/UserProfile";
+import Viewcart from "./components/ViewCart/Viewcart";
 
 const App = () => {
   return (
@@ -48,6 +49,16 @@ const App = () => {
             element={
               <PrivateRoute>
                 <UserProfile />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/user-dashboard/:firstName/viewcart"
+            element={
+              <PrivateRoute>
+                <NavBar />
+                <Viewcart />
               </PrivateRoute>
             }
           />

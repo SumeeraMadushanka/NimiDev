@@ -18,6 +18,26 @@ const StorageDrive = () => {
     setTimeout(() => setSpin(true), 3000);
   }, []);
 
+  const addToCart = async (value) => {
+    const productName = value.productName;
+    const productNumber = value.productNumber;
+    const productCategory = value.productCategory;
+    const productPrice = value.productPrice;
+    const productQty = value.productQty;
+    try {
+      await axios.post("/product/createCart", {
+        productCategory,
+        productName,
+        productNumber,
+        productPrice,
+        productQty,
+      });
+      alert("Successfully Added to the cart");
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   const filterData = data.filter(
     (el) => el.productCategory === "Storage Drive"
   );
@@ -58,7 +78,10 @@ const StorageDrive = () => {
                       </h2>
                     </div>
                     <div>
-                      <button className=" mx-auto mb-4 btn">
+                      <button
+                        className=" mx-auto mb-4 btn"
+                        onClick={() => addToCart(value)}
+                      >
                         <span class="text spaan">Add to Cart</span>
                       </button>
                     </div>

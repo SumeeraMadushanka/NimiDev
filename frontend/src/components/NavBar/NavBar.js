@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { Popover, Button } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
 import UserProfile from "../User/UserProfile";
+import axios from "axios";
 const NavBar = () => {
   let Links = [
     { name: "HOME", link: "/" },
@@ -16,6 +17,8 @@ const NavBar = () => {
   const { firstName } = useParams();
 
   const [open, setOpen] = useState(false);
+
+  const [data, setData] = useState([]);
 
   const history = useNavigate();
 
@@ -30,6 +33,17 @@ const NavBar = () => {
     history("/login");
   };
 
+  const deleteHandler = async () => {
+    try {
+      await axios.delete("/product/delete");
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    (async () =>
+      await axios.get("/product/getCart").then((res) => setData(res.data)))();
+  });
+
   const content = (
     <div style={{ width: "2px" }}>
       <div>
@@ -37,7 +51,13 @@ const NavBar = () => {
       </div>
       <div className="mt-1">
         {/* <NavLink to="/login"> */}
-        <Button className="w-20" onClick={logoutHandler}>
+        <Button
+          className="w-20"
+          onClick={() => {
+            logoutHandler();
+            deleteHandler();
+          }}
+        >
           Logout
         </Button>
         {/* </NavLink> */}
@@ -76,9 +96,15 @@ const NavBar = () => {
             >
               <div className=" flex ite">
                 <div className="bg-white w-28 hover:opacity-75 rounded-3xl flex justify-between items-center p-1 cursor-pointer">
-                  <ShoppingCartOutlined className=" text-3xl translate-x-1" />
+                  <NavLink
+                    to={`/user-dashboard/${localStorage.getItem(
+                      "firstName"
+                    )}/viewcart`}
+                  >
+                    <ShoppingCartOutlined className=" text-3xl translate-x-1" />
+                  </NavLink>
                   <div className=" rounded-full text-lg  border-4 -translate-x-2 border-red-400 px-1 text-slate-900 ">
-                    01
+                    {data.length}
                   </div>
                 </div>
                 <button className="inline-flex items-center bg-sky-600 text-white border-0 py-1 px-3 focus:outline-none hover:bg-black rounded-full text-base mt-4 md:mt-0 translate-x-6">
