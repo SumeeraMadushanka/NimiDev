@@ -11,22 +11,20 @@ const AllProducts = () => {
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(true);
 
+  const history = useNavigate();
+
+
   useEffect(() => {
     (async () => {
       await fetch("/product/getProduct")
         .then((res) => res.json())
         .then((json) => {
           setData(json);
+          console.log(json);
           setLoader(!loader);
         });
     })();
   }, []);
-
-  const history = useNavigate();
-
-  const search = window.location.search;
-  const params = new URLSearchParams(search);
-  const id = params.get("_id");
 
   const deleteHandler = async (id) => {
     try {
@@ -78,7 +76,7 @@ const AllProducts = () => {
         },
         {
           text: "Monitor",
-          value: "monitor",
+          value: "monotor",
         },
         {
           text: "Processor",
@@ -86,25 +84,25 @@ const AllProducts = () => {
         },
         {
           text: "Graphic Card",
-          value: "graphic_card",
+          value: "graphic card",
         },
         {
           text: "Storage Drive",
-          value: "storage_drive",
+          value: "storage drive",
         },
         {
           text: "PC Case",
-          value: "pc_case",
+          value: "pc case",
         },
         {
           text: "Keyboard & Mouse",
-          value: "keyboard_mouse",
+          value: "keyboard mouse",
         },
       ],
       // specify the condition of filtering result
       // here is that finding the name started with `value`
       onFilter: (value, record) =>
-        record.designation.toLowerCase().includes(value) === 0,
+        record.productCategory.toLowerCase().indexOf(value) === 0,
     },
     {
       title: "Product Price",
