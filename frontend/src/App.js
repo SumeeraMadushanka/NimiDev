@@ -9,6 +9,8 @@ import UserDashboard from "./components/User/UserDashboard";
 import Services from "./components/Services/Services";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import UserProfile from "./components/User/UserProfile";
 
 const App = () => {
   return (
@@ -21,14 +23,33 @@ const App = () => {
           <Route path="/contact" element={[<NavBar />, <Contact />]} />
           <Route path="/login" element={[<NavBar />, <Login />]} />
           <Route path="/register" element={[<NavBar />, <Register />]} />
+
           <Route
             path="/user-dashboard/:firstName"
-            element={[<NavBar />, <UserDashboard />]}
+            element={
+              <PrivateRoute>
+                <NavBar />
+                <UserDashboard />
+              </PrivateRoute>
+            }
           />
 
           <Route
             path="/admin-dashboard/:firstName"
-            element={[<AdminDashboard />]}
+            element={
+              <PrivateRoute>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/admin-dashboard/:firstName/profile/:id"
+            element={
+              <PrivateRoute>
+                <UserProfile />
+              </PrivateRoute>
+            }
           />
         </Routes>
       </Router>
