@@ -6,6 +6,8 @@ import {
   LaptopOutlined,
 } from "@ant-design/icons";
 
+import User from "./User";
+
 //Product components
 import Laptop from "../Products/Laptop";
 import Monitor from "../Products/Monitor";
@@ -172,6 +174,17 @@ const UserDashboard = () => {
       <Layout className="site-layout">
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}></Breadcrumb>
+
+          {location.pathname ===
+            `/user-dashboard/${localStorage.getItem("firstName")}` &&
+            !queryLaptop &&
+            !queryMonitor &&
+            !queryProcessor &&
+            !queryPCcase &&
+            !queryGraphicCard &&
+            !queryStorageDrive &&
+            !queryKeyboardMouse && <User />}
+
           {queryLaptop === "laptop" && <Laptop />}
           {queryMonitor === "monitor" && <Monitor />}
           {queryGraphicCard === "graphic_card" && <GraphicCard />}

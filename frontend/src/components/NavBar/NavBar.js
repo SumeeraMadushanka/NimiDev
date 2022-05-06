@@ -54,9 +54,13 @@ const NavBar = () => {
               <div className=" text-5xl translate-y-0.5">
                 <ion-icon name="logo-windows"></ion-icon>
               </div>
-              <span class="ml-3 text-xl pl-1 text-sky-600">
-                WinMac Computers
-              </span>
+              <NavLink
+                to={`/user-dashboard/${localStorage.getItem("firstName")}`}
+              >
+                <span class="ml-3 text-xl pl-1 text-sky-600">
+                  WinMac Computers
+                </span>
+              </NavLink>
             </div>
             <div
               onClick={() => setOpen(!open)}
@@ -74,7 +78,7 @@ const NavBar = () => {
                 <div className="bg-white w-28 hover:opacity-75 rounded-3xl flex justify-between items-center p-1 cursor-pointer">
                   <ShoppingCartOutlined className=" text-3xl translate-x-1" />
                   <div className=" rounded-full text-lg  border-4 -translate-x-2 border-red-400 px-1 text-slate-900 ">
-                  01
+                    01
                   </div>
                 </div>
                 <button className="inline-flex items-center bg-sky-600 text-white border-0 py-1 px-3 focus:outline-none hover:bg-black rounded-full text-base mt-4 md:mt-0 translate-x-6">
@@ -139,7 +143,5 @@ const NavBar = () => {
     </>
   );
 };
-
-
 
 export default NavBar;

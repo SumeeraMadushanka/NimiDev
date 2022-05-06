@@ -24,29 +24,28 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage, fileFilter });
 
-(exports.createProduct = upload.single("productImage")),
-  async (req, res) => {
-    const { productNumber, productName, productCategory, productImage } =
-      req.body;
+exports.createProduct = async (req, res) => {
+  const { productNumber, productName, productCategory, productImage } =
+    req.body;
 
-    const productQty = Number(req.body.productQty);
+  const productQty = Number(req.body.productQty);
 
-    const productPrice = Number(req.body.productPrice);
+  const productPrice = Number(req.body.productPrice);
 
-    const newProduct = new Product({
-      productNumber,
-      productName,
-      productCategory,
-      productPrice,
-      productQty,
-      productImage,
-    });
+  const newProduct = new Product({
+    productNumber,
+    productName,
+    productCategory,
+    productPrice,
+    productQty,
+    productImage,
+  });
 
-    await newProduct
-      .save()
-      .then(() => res.json({ success: true }))
-      .catch((error) => res.status(500).json({ success: false, error: error }));
-  };
+  await newProduct
+    .save()
+    .then(() => res.json({ success: true }))
+    .catch((error) => res.status(500).json({ success: false, error: error }));
+};
 
 exports.getProduct = async (req, res) => {
   await Product.find()
@@ -70,27 +69,26 @@ exports.deleteProduct = async (req, res) => {
     .catch((error) => res.status(500).json({ success: false, error: error }));
 };
 
-(exports.updateProduct = upload.single("productImage")),
-  async (req, res) => {
-    const { id } = req.params;
+exports.updateProduct = async (req, res) => {
+  const { id } = req.params;
 
-    const {
-      productNumber,
-      productName,
-      productCategory,
-      productQty,
-      productPrice,
-      productImage,
-    } = req.body;
+  const {
+    productNumber,
+    productName,
+    productCategory,
+    productQty,
+    productPrice,
+    productImage,
+  } = req.body;
 
-    await Product.findByIdAndUpdate(id, {
-      productNumber,
-      productName,
-      productCategory,
-      productPrice,
-      productQty,
-      productImage,
-    })
-      .then(() => res.json({ message: "Update Successfully" }))
-      .catch((error) => res.json({ success: false, error: error }));
-  };
+  await Product.findByIdAndUpdate(id, {
+    productNumber,
+    productName,
+    productCategory,
+    productPrice,
+    productQty,
+    productImage,
+  })
+    .then(() => res.json({ message: "Update Successfully" }))
+    .catch((error) => res.json({ success: false, error: error }));
+};

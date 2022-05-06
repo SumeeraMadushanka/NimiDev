@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Carousel, Spin } from "antd";
-import img1 from "../Assets/Home/bg1.png";
-import img2 from "../Assets/Home/bg2.png";
+
 import img3 from "../Assets/Home/bg3.png";
 import "antd/dist/antd.css";
 
@@ -24,18 +23,17 @@ const CarouselView = () => {
   return (
     <>
       <div>
-        <Carousel autoplay effect="fade">
-          <center>{loader === false && <Spin />}</center>
-          <div>
-            <img src={img1} style={contentStyle} />
-          </div>
-          <div>
-            <img src={img2} style={contentStyle} />
-          </div>
-          <div>
+        <div>
+          {loader === false ? (
+            <center>
+              <div className=" mt-56">
+                <Spin />
+              </div>
+            </center>
+          ) : (
             <img src={img3} style={contentStyle} />
-          </div>
-        </Carousel>
+          )}
+        </div>
       </div>
     </>
   );
