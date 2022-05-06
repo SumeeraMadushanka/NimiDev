@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Layout, Menu, Button, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb } from "antd";
 import {
   FundProjectionScreenOutlined,
-  UserAddOutlined,
-  LogoutOutlined,
+  LaptopOutlined,
 } from "@ant-design/icons";
 
 //Product components
@@ -72,7 +71,7 @@ const UserDashboard = () => {
         >
           <Menu.Item
             key="1"
-            icon={<UserAddOutlined />}
+            icon={<LaptopOutlined />}
             className="text-lg"
             onClick={() => {
               history(
@@ -172,8 +171,7 @@ const UserDashboard = () => {
       </Sider>
       <Layout className="site-layout">
         <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-          </Breadcrumb>
+          <Breadcrumb style={{ margin: "16px 0" }}></Breadcrumb>
           {queryLaptop === "laptop" && <Laptop />}
           {queryMonitor === "monitor" && <Monitor />}
           {queryGraphicCard === "graphic_card" && <GraphicCard />}

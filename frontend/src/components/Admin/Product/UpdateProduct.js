@@ -44,6 +44,8 @@ const UpdateProduct = () => {
 
   const id = params.get("_id");
 
+  console.log(params._id)
+
   useEffect(() => {
     (async () => {
       axios
@@ -134,7 +136,7 @@ const UpdateProduct = () => {
           <Spin style={{ marginTop: "200px" }} />
         </center>
       ) : (
-        <div className=" mt-20 -translate-x-52">
+        <div className=" mt-20 -translate-x-52 ">
           <Form
             {...layout}
             form={form}
@@ -218,11 +220,6 @@ const UpdateProduct = () => {
                 prefix={
                   <DollarCircleOutlined className="site-form-item-icon" />
                 }
-                suffix={[
-                  <Tooltip title="Please Enter Product Price">
-                    <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-                  </Tooltip>,
-                ]}
                 onChange={(e) => setProductprice(e.target.value)}
                 value={productPrice}
                 type="number"

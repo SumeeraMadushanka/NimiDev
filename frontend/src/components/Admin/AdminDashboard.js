@@ -8,6 +8,8 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 
+import CarouselView from "./CarouselView";
+
 //Product components
 import ProductDashboard from "./Product/ProductDashboard";
 import Header from "./Header";
@@ -16,7 +18,7 @@ import AddProduct from "./Product/AddProduct";
 import UpdateProduct from "./Product/UpdateProduct";
 
 //Customer components
-import CustomerDashboard from "./Customer/CustomerDashboard";
+import CustomerDashboard from "./Customer/Customer.";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -29,8 +31,12 @@ const AdminDashboard = () => {
   const params = new URLSearchParams(search);
 
   const queryCustomer = params.get("_optCustomer");
+
+  //product
   const queryProduct = params.get("_optProduct");
-  const queryEdit = params.get("_edit");
+  const queryViewProduct = params.get("_product");
+  const queryAddProduct = params.get("_product");
+  const queryEditProduct = params.get("_product");
 
   const onCollapse = (collapsed) => {
     setCollapsed(collapsed);
@@ -143,11 +149,18 @@ const AdminDashboard = () => {
             <Breadcrumb.Item>{greet}</Breadcrumb.Item>
             <Breadcrumb.Item>Admin</Breadcrumb.Item>
           </Breadcrumb>
+          {location.pathname ===
+            `/admin-dashboard/${localStorage.getItem("firstName")}` &&
+            !queryProduct &&
+            !queryAddProduct &&
+            !queryCustomer &&
+            !queryViewProduct &&
+            !queryEditProduct && <CarouselView />}
           {queryCustomer === "customer" && <CustomerDashboard />}
-          {queryProduct === "addProduct" && [<Header />, <AddProduct />]}
-          {queryEdit === "true" && [<Header />, <UpdateProduct />] }
-          {queryProduct === "allProducts" && [<Header />, <AllProduct />]}
           {queryProduct === "product" && [<Header />, <ProductDashboard />]}
+          {queryViewProduct === "allProducts" && [<Header />, <AllProduct />]}
+          {queryAddProduct === "addProduct" && [<Header />, <AddProduct />]}
+          {queryEditProduct === "edit" && [<Header />, <UpdateProduct />]}
         </Content>
         <Footer style={{ textAlign: "center" }}>
           Copyright © {date.getFullYear()} WinMac Computers
