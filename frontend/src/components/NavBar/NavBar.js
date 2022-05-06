@@ -13,20 +13,20 @@ const NavBar = () => {
     { name: "CONTACT", link: "/contact" },
   ];
 
-  const { firstName, lastName, contactNo, type, email, authToken, id } = useParams();
+  const { firstName } = useParams();
 
   const [open, setOpen] = useState(false);
 
   const history = useNavigate();
 
   const logoutHandler = () => {
-    localStorage.removeItem("authToken", authToken);
-    localStorage.removeItem("firstName", firstName);
-    localStorage.removeItem("lastName", lastName);
-    localStorage.removeItem("type", type);
-    localStorage.removeItem("contactNo", contactNo);
-    localStorage.removeItem("email", email);
-    localStorage.removeItem("id", id);
+    localStorage.setItem("authToken", null);
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("type");
+    localStorage.removeItem("contactNo");
+    localStorage.removeItem("email");
+    localStorage.removeItem("id");
     history("/login");
   };
 
